@@ -45,27 +45,27 @@ export default function LoadForm() {
     <>
       <form id="form" onSubmit={handleSubmit(onSubmit)} noValidate>
 
-        <label htmlFor="driverName">Name</label>
+        <label htmlFor="driverName">Drivers's Name:</label>
         <input type="text" id="driverName" {...register('driverName', { required: "*Driver's name is required" })} />
         <p><sup>{errors.driverName?.message}</sup></p>
 
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Driver's Email: </label>
         <input type="text" id="email" {...register('email', { required: "*Email is required" })} />
         <p><sup>{errors.email?.message}</sup></p>
 
-        <label htmlFor="phoneNumber">Phone Number</label>
+        <label htmlFor="phoneNumber">Driver's Phone Number: </label>
         <input type="text" id="phoneNumber" {...register('phoneNumber', { required: "*Phone number is required" })} />
         <p><sup>{errors.phoneNumber?.message}</sup></p>
 
-        <label htmlFor="loadWeight">Load Weight</label>
+        <label htmlFor="loadWeight">Load Weight:</label>
         <input type="number" id="loadWeight" {...register('loadWeight', { required: "*Load weight is required" })} />
         <p><sup>{errors.loadWeight?.message}</sup></p>
 
-        <label htmlFor="origin">Origin</label>
+        <label htmlFor="origin">Load Origin: </label>
         <input type="text" id="origin" {...register('origin', { required: "*Origin is required" })} />
         <p><sup>{errors.origin?.message}</sup></p>
 
-        <label htmlFor="destinations">Destination(s)</label>
+        <label htmlFor="destinations">Load Destination(s): </label>
         <div id="destinationsList">
           {fields.map((field, index) => (
             <div className="destination" key={field.id}>
