@@ -65,20 +65,6 @@ export default function LoadForm() {
         <input type="text" id="origin" {...register('origin', { required: "*Origin is required" })} />
         <p><sup>{errors.origin?.message}</sup></p>
 
-        {/* <div>
-          <label htmlFor="destination">Destination(s)</label>
-          <div id="destinationsList">
-            {fields.map((field, index) => (
-              <div className="destination" key={field.id}>
-                <input type="text" {...register(`destinations.${index}.destination`)} />
-                {index > 0 && <button type="button" onClick={() => remove(index)}>Remove Destination</button>}
-              </div>
-            ))}
-            <p><sup>{errors.destinations?.message}</sup></p>
-            <button type="button" onClick={() => append({ destination: "" })}>Add Destination</button>
-          </div>
-        </div> */}
-
         <label htmlFor="destinations">Destination(s)</label>
         <div id="destinationsList">
           {fields.map((field, index) => (
@@ -91,11 +77,8 @@ export default function LoadForm() {
           <button type="button" onClick={() => append({ destination: "" })}>Add Destination</button>
         </div>
 
-        {/* <label htmlFor="destination">Destination(s)</label>
-        <input type="text" id="destination" {...register('destination', { required: "*Destination is required" })} />
-        <p><sup>{errors.destination?.message}</sup></p> */}
-
         <button>Submit</button>
+
       </form>
       <DevTool control={control} />
     </>

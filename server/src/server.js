@@ -28,7 +28,7 @@ app.use(staticAssets);
 /* --------------------------------- Routes --------------------------------- */
 app.use(express.json());
 app.use(logRoutes);
-app.use(shipmentRoutes);
+app.use("/", shipmentRoutes);
 
 
 module.exports = app;
