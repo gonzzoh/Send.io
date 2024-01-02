@@ -3,12 +3,12 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-    return knex.schema.createTable('truck_shipments', (table) => {
+    return knex.schema.createTable('shipments', (table) => {
         table.increments();
         table.string('name');
         table.string('email'); 
-        table.integer('phoneNumber'); 
-        table.integer('loadWeight');
+        table.string('phone_number');
+        table.string('load_weight'); 
         table.string('origin');
         table.string('destination');
       });
@@ -19,5 +19,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-    return knex.schema.dropTable('truck_shipments');
+    return knex.schema.dropTable('shipments');
 };
