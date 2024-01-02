@@ -10,7 +10,7 @@ exports.up = function(knex) {
         table.string('phone_number');
         table.string('load_weight'); 
         table.string('origin');
-        table.string('destination');
+        table.array('destinations');
       });
 };
 

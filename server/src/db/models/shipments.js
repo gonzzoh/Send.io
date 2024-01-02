@@ -3,10 +3,10 @@ const knex = require('./knex');
 class Shipments {
   static async create(body) {
     try {
-      const { name, email, phone_number, load_weight, origin, destination } = body;
-      console.log("Inside try block", name, email, phone_number, load_weight, origin, destination);
-      const query = `INSERT INTO shipments (name, email, phone_number, load_weight, origin, destination) VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
-      const res = await knex.raw(query, [name, email, phone_number, load_weight, origin, destination]);
+      const { name, email, phone_number, load_weight, origin, destinations } = body;
+      console.log("Inside try block", name, email, phone_number, load_weight, origin, destinations);
+      const query = `INSERT INTO shipments (name, email, phone_number, load_weight, origin, destinations) VALUES (?, ?, ?, ?, ?, ?) RETURNING *`;
+      const res = await knex.raw(query, [name, email, phone_number, load_weight, origin, destinations]);
       return res.rows[0];
     } catch (err) {
       console.error(err);
