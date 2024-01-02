@@ -9,8 +9,8 @@ type FormData = {
   email: string
   phoneNumber: string
   origin: string
-  // destinations: { destination: string }[]
-  destination: string
+  destinations: { destination: string }[]
+  // destination: string
 }
 export default function LoadForm() {
   const form = useForm<FormData>({
@@ -20,19 +20,19 @@ export default function LoadForm() {
       email: "",
       phoneNumber: "",
       origin: "",
-      // destinations: [{ destination: "" }],
-      destination: ""
+      destinations: [{ destination: "" }],
+      // destination: ""
     },
   });
 
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  // const { fields, append, remove } = useFieldArray({
-  //   name: "destinations",
-  //   control
-  // })
-  
+  const { fields, append, remove } = useFieldArray({
+    name: "destinations",
+    control
+  })
+
   const onSubmit = (data: FormData) => {
     console.log("submitted", data)
     const formElement = document.getElementById("form") as HTMLFormElement;;
@@ -79,9 +79,21 @@ export default function LoadForm() {
           </div>
         </div> */}
 
-        <label htmlFor="destination">Destination(s)</label>
+        <label htmlFor="destinations">Destination(s)</label>
+        <div id="destinationsList">
+          {fields.map((field, index) => (
+            <div className="destination" key={field.id}>
+              <input type="text" {...register(`destinations.${index}.destination`, { required: "*Destination is required" })} />
+              {index > 0 && <button type="button" onClick={() => remove(index)}>Remove Destination</button>}
+              <p><sup>{errors.destinations && errors.destinations[index]?.destination?.message}</sup></p>
+            </div>
+          ))}
+          <button type="button" onClick={() => append({ destination: "" })}>Add Destination</button>
+        </div>
+
+        {/* <label htmlFor="destination">Destination(s)</label>
         <input type="text" id="destination" {...register('destination', { required: "*Destination is required" })} />
-        <p><sup>{errors.destination?.message}</sup></p>
+        <p><sup>{errors.destination?.message}</sup></p> */}
 
         <button>Submit</button>
       </form>
