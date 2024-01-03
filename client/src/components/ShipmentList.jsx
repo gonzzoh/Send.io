@@ -25,10 +25,10 @@ function App() {
                         <ol className="shipmentDestinations">
                             <h3 className="destinationHeader">Destinations</h3>
                             {data.destinations.map((location) => (
-                                <li className="destination">{location}</li>
+                                <li className="destination">{JSON.parse(location).destination}</li>
                             ))}
                         </ol>
-                        <button id="Delete Shipment" onClick={() => fetch(`http://localhost:8000/shipments/${data.id}`, { method: "DELETE" })}>Remove Shipment</button>
+                        <button id="deleteShipment" onClick={() => fetch(`http://localhost:8000/shipments/${data.id}`, { method: "DELETE" })}>Remove Shipment</button>
                     </div>
                 ))}
             </div>
