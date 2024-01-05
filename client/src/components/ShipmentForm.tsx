@@ -61,11 +61,17 @@ export default function LoadForm() {
         <p><sup>{errors.name?.message}</sup></p>
 
         <label htmlFor="email">Driver's Email: </label>
-        <input type="text" id="email" {...register('email', { required: "*Email is required" })} />
+        <input type="text" id="email" {...register('email', {
+          required: "*Email is required",
+          pattern: { value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, message: "Invalid email address" }
+        })} />
         <p><sup>{errors.email?.message}</sup></p>
 
         <label htmlFor="phone_number">Driver's Phone Number: </label>
-        <input type="text" id="phone_number" {...register('phone_number', { required: "*Phone number is required" })} />
+        <input type="text" id="phone_number" {...register('phone_number', {
+          required: "*Phone number is required",
+          pattern: { value: /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/, message: "Invalid phone number" }
+        })} />
         <p><sup>{errors.phone_number?.message}</sup></p>
 
         <label htmlFor="load_weight">Load Weight(lbs):</label>
