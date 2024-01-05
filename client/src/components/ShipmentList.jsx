@@ -19,18 +19,15 @@ function App() {
         fetch(`http://localhost:8000/shipments/${id}`, {
             method: "DELETE",
         }).then(() => {
-            // After deletion, fetch updated data
             fetchData();
         });
     };
 
     useEffect(() => {
-        // Fetch data on the first render
         fetchData();
-    }, []); // Empty dependency array ensures it runs only once on mount
+    }, []); 
 
     useEffect(() => {
-        // Fetch data when submissionValue becomes true
         if (submissionValue) {
             fetchData();
         }

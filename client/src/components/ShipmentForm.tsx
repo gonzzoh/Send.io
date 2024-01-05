@@ -24,7 +24,7 @@ export default function LoadForm() {
     },
   });
 
-  const { submissionValue, setSubmissionValue } = useContext(SubmissionContext);
+  const { setSubmissionValue } = useContext(SubmissionContext);
   const { register, control, handleSubmit, formState, reset } = form;
   const { errors, isSubmitSuccessful } = formState;
 
