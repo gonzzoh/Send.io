@@ -11,7 +11,7 @@ exports.seed = async (knex) => {
     // Now run your logic to create your resources with your models
 
     await knex.table('shipments').insert([
-      { name: 'Tyler Durton', email: 'heavystuff@dawg.com', phone_number: 1234567890, load_weight: 9000, origin: "New Jersey", destinations: [{destination : 'New York'}, {destination : 'Los Angeles'}] },
+      { name: 'Tyler Durden', email: 'heavystuff@dawg.com', phone_number: 1234567890, load_weight: 9000, origin: "New Jersey", destinations: [{destination : 'New York'}, {destination : 'Los Angeles'}] },
     ])
 
   };

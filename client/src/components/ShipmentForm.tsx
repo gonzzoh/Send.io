@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
+import { SubmissionContext } from '../context/SubmissionContext'
 import '../styles/LoadForm.css'
 
 type FormData = {
@@ -23,8 +24,9 @@ export default function LoadForm() {
     },
   });
 
-  const { register, control, handleSubmit, formState } = form;
-  const { errors } = formState;
+  const { submissionValue, setSubmissionValue } = useContext(SubmissionContext);
+  const { register, control, handleSubmit, formState, reset } = form;
+  const { errors, isSubmitSuccessful } = formState;
 
   const { fields, append, remove } = useFieldArray({
     name: "destinations",
@@ -39,13 +41,16 @@ export default function LoadForm() {
       },
       body: JSON.stringify(data),
     })
-    .then(() => console.log("Submitted", data))
-    .catch((err) => console.error(err));
-    const formElement = document.getElementById("form") as HTMLFormElement;;
-    if (formElement) {
-      formElement.reset();
-    }
+      .then(() => console.log("Submitted", data))
+      .catch((err) => console.error(err));
   }
+
+  useEffect(() => {
+    if (isSubmitSuccessful && setSubmissionValue) {
+      setSubmissionValue(true);
+      reset();
+    }
+  }, [isSubmitSuccessful, setSubmissionValue, reset]);
 
   return (
     <>

@@ -1,14 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { SubmissionContext } from "../context/SubmissionContext";
 import "../styles/ShipmentList.css";
 
 function App() {
     const [shipmentData, setShipmentData] = useState([]);
+    const { submissionValue, setSubmissionValue } = useContext(SubmissionContext);
 
-    useEffect(() => {
+    const fetchData = () => {
         fetch("http://localhost:8000/shipments")
             .then((res) => res.json())
             .then((data) => setShipmentData(data))
-    }, []);
+            .finally(() => {
+                setSubmissionValue(false);
+            });
+    };
+
+    const handleDelete = (id) => {
+        fetch(`http://localhost:8000/shipments/${id}`, {
+            method: "DELETE",
+        }).then(() => {
+            // After deletion, fetch updated data
+            fetchData();
+        });
+    };
+
+    useEffect(() => {
+        // Fetch data on the first render
+        fetchData();
+    }, []); // Empty dependency array ensures it runs only once on mount
+
+    useEffect(() => {
+        // Fetch data when submissionValue becomes true
+        if (submissionValue) {
+            fetchData();
+        }
+    }, [submissionValue, setSubmissionValue]);
 
     return (
         <>
@@ -25,10 +51,10 @@ function App() {
                         <ol className="shipmentDestinations">
                             <h3 className="destinationHeader">Destinations</h3>
                             {data.destinations.map((location) => (
-                                <li className="destination">{JSON.parse(location).destination}</li>
+                                <li className="destination" key={location}>{JSON.parse(location).destination}</li>
                             ))}
                         </ol>
-                        <button id="deleteShipment" onClick={() => fetch(`http://localhost:8000/shipments/${data.id}`, { method: "DELETE" })}>Remove Shipment</button>
+                        <button id="deleteShipment" onClick={() => handleDelete(data.id)}> Remove Shipment </button>
                     </div>
                 ))}
             </div>
@@ -36,4 +62,4 @@ function App() {
     );
 }
 
-export default App
+export default App;
