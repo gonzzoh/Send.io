@@ -1,0 +1,15 @@
+#root {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+    min-height: 100vh; /* Ensure at least the full height of the viewport */
+    width: 100%; /* Occupy the full width of the viewport */
+    /* margin: 0;
+    padding: 0; */
+  }
+
+.leaflet-container {
+    /* width: 100%; */
+    height: 100vh;
+}
