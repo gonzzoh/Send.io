@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 export default function TruckRoutes() {
     let [routeData, setRouteData] = useState({});
     let [origin, setOrigin] = useState("New York, NY");
-    let [destinations, setDestinations] = useState(["Los Angeles, CA"]);
+    let [destinations, setDestinations] = useState(["Los Angeles, CA", "Denver, CO"]);
     const myAPIKey = "282e5784a0a84ae096ecc0252edc2c4a";
 
     /* ---------------------- Convert Names to Coordinates ---------------------- */
@@ -16,10 +16,12 @@ export default function TruckRoutes() {
         try {
             const response = await fetch(geocodingUrl);
             const data = await response.json();
+            console.log("Geocoding Data:", data);
 
             if (data.features && data.features.length > 0) {
-                const { lon, lat } = data.features[0].geometry.coordinates;
-                return [lat, lon]; // Return coordinates in [latitude, longitude] format
+                const coordinates = data.features[0].geometry.coordinates;
+                console.log("Coordinates:", coordinates);
+                return coordinates;
             } else {
                 console.error(`No coordinates found for ${locationName}`);
                 return null;
@@ -48,7 +50,6 @@ export default function TruckRoutes() {
 
         if (destinationCoordinates.every(coord => coord !== null)) {
             setDestinations(destinationCoordinates);
-
             fetch(routingUrl)
                 .then(res => res.json())
                 .then(result => setRouteData(result));
@@ -57,6 +58,8 @@ export default function TruckRoutes() {
 
     useEffect(() => {
         console.log("Route Data:", routeData);
+        console.log("Origin:", origin);
+        console.log("Destinations:", destinations);
     }, [routeData]);
     /* -------------------------------------------------------------------------- */
     return (
