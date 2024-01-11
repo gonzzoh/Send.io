@@ -97,7 +97,7 @@ export default function LoadForm() {
         <button>Submit</button>
 
       </form>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </>
   )
 }

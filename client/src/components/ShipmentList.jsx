@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { SubmissionContext } from "../context/SubmissionContext";
+import TruckRoutes from './TruckRoutes.jsx';
 import "../styles/ShipmentList.css";
 
 function App() {
     const [shipmentData, setShipmentData] = useState([]);
+    const [routesFetched, setRoutesFetched] = useState(false);
     const { submissionValue, setSubmissionValue } = useContext(SubmissionContext);
 
     const fetchData = () => {
@@ -40,6 +42,7 @@ function App() {
                 {shipmentData.map((data) => (
                     <div className="shipmentCard" key={data.id}>
                         <h2 className="shipmentId">Shipment ID: {data.id}</h2>
+                        <TruckRoutes origin={data.origin} destinations={data.destinations} routesFetched={routesFetched} />
                         <p className="shipmentName">Driver's Name: {data.name}</p>
                         <p className="shipmentEmail">Driver's Email: {data.email}</p>
                         <p className="shipmentPhone">Driver's Phone Number: {data.phone_number}</p>
@@ -52,6 +55,7 @@ function App() {
                             ))}
                         </ol>
                         <button id="deleteShipment" onClick={() => handleDelete(data.id)}> Remove Shipment </button>
+                        <button id="showRoute" onClick={() => setRoutesFetched(true)}> Show Shipping Route </button>
                     </div>
                 ))}
             </div>
