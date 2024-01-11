@@ -8,6 +8,7 @@ router.use(addModels);
 
 router.get("/shipments", shipmentsController.list);
 router.post("/shipments", shipmentsController.create);
+router.get("/shipments/:id", shipmentsController.get);
 router.delete("/shipments/:id", shipmentsController.destroy);
 
 module.exports = router;
