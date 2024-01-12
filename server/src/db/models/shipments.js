@@ -14,6 +14,17 @@ class Shipments {
     }
   }
 
+  static async get(id) {
+    try {
+      const query = `SELECT * FROM shipments WHERE id = ?`;
+      const res = await knex.raw(query, [id]);
+      return res.rows[0];
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+
   static async delete(id) {
     try {
       const query = `DELETE FROM shipments WHERE id = ? RETURNING *`;
